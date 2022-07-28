@@ -22,7 +22,10 @@ pod 'CYCircleSlider'
 
 ## Author
 
-careyang, mastercy919@hotmail.com
+I Fork from [taglia3](https://github.com/taglia3/CircularSlider)
+
+I made simple modifications to suit my own needs. Thanks for sharing
+
 
 ## License
 
