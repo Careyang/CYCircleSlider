@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'CYCircleSlider_Example' do
+  pod 'CYCircleSlider', :path => '../'
+
+  target 'CYCircleSlider_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
