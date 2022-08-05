@@ -18,14 +18,15 @@ open class CYCircleSlider: UIView {
     fileprivate var rotationGesture: CYRotateGestureRecognizer?
     fileprivate var backingValue: Float = 0
     fileprivate var backingKnobAngle: CGFloat = 0
-    fileprivate var backingFractionDigits: NSInteger = 2
+    // 小数点后边位数
+    fileprivate var backingFractionDigits: NSInteger = 0
     fileprivate let maxFractionDigits: NSInteger = 4
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         sliderConfigure()
     }
-    
+
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         sliderConfigure()
@@ -91,7 +92,7 @@ open class CYCircleSlider: UIView {
     }
 
     /// 设置数字是否可以手动编辑
-    @IBInspectable open var textCanEdit: Bool = true {
+    @IBInspectable open var textCanEdit: Bool = false {
         didSet {
             valueTextField.isEnabled = textCanEdit
         }
@@ -222,8 +223,8 @@ open class CYCircleSlider: UIView {
         strokeAnimation.fromValue = progressLayer.strokeEnd
         strokeAnimation.toValue = CGFloat(normalizedValue)
         strokeAnimation.isRemovedOnCompletion = false
-        strokeAnimation.fillMode = kCAFillModeRemoved
-        strokeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        strokeAnimation.fillMode = CAMediaTimingFillMode.removed
+        strokeAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         progressLayer.add(strokeAnimation, forKey: "strokeAnimation")
         progressLayer.strokeEnd = CGFloat(normalizedValue)
         CATransaction.commit()
@@ -274,14 +275,14 @@ open class CYCircleSlider: UIView {
         backgroundLayer.lineWidth = progressWidth
         backgroundLayer.fillColor = UIColor.clear.cgColor
         backgroundLayer.strokeColor = bgColor.cgColor
-        backgroundLayer.lineCap = kCALineCapRound
+        backgroundLayer.lineCap = CAShapeLayerLineCap.round
     }
 
     fileprivate func appearanceProgressLayer() {
         progressLayer.lineWidth = progressWidth
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.strokeColor = highlighted ? pgHighlightedColor.cgColor : pgNormalColor.cgColor
-        progressLayer.lineCap = kCALineCapRound
+        progressLayer.lineCap = CAShapeLayerLineCap.round
     }
     func setupUI() {
         self.addSubview(logoImageView)
@@ -308,7 +309,7 @@ open class CYCircleSlider: UIView {
             make.top.equalTo(valueTextField.snp.bottom)
             make.height.equalTo(1.0)
         }
-  
+
     }
     // MARK: - drawing methods
     override open func draw(_ rect: CGRect) {

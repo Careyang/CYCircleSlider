@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CYCircleSlider
 
 @objc public protocol CYCircleProtocol: NSObjectProtocol {
 
